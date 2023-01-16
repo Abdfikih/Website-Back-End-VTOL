@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const droneSchema = new mongoose.Schema(
-  {
+const droneSchema = new mongoose.Schema({
+  cordinat: {
     x_axis: String,
     y_axis: String,
     z_axis: String,
@@ -10,23 +10,21 @@ const droneSchema = new mongoose.Schema(
     roll: String,
     alt: String,
   },
-  {
-    timestamps: true,
+  // {
+  //   timestamps: true,
+  // },
+  temperature: {
+    required: true,
+    type: Number,
   },
-    temperature: {
-        required: true,
-        type: Number
-    },
-    humidity: {
-        required: true,
-        type: Number
-    },
-    moisture: {
-        required: true,
-        type: Number
-    }
-})
-
-
+  humidity: {
+    required: true,
+    type: Number,
+  },
+  moisture: {
+    required: true,
+    type: Number,
+  },
+});
 const Drone = mongoose.model("Drone", droneSchema);
 module.exports = Drone;

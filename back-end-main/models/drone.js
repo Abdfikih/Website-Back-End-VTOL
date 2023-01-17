@@ -12,8 +12,21 @@ const droneSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
-);
+  },
+    temperature: {
+        required: true,
+        type: Number
+    },
+    humidity: {
+        required: true,
+        type: Number
+    },
+    moisture: {
+        required: true,
+        type: Number
+    }
+})
+
 
 const Drone = mongoose.model("Drone", droneSchema);
 module.exports = Drone;

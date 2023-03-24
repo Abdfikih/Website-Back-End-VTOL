@@ -187,6 +187,8 @@ app.get("/updatesumnode", async (req, res) => {
 
   const query = `SELECT * FROM sum_node`;
 
+  console.log("masukkk");
+
   client.query(query, (err, result) => {
     if (err) {
       console.error(err);

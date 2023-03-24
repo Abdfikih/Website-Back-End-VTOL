@@ -202,7 +202,7 @@ app.get("/updatesumnode", async (req, res) => {
   });
 });
 
-app.get("/hello", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Hello, world!");
 });
 

@@ -5,10 +5,6 @@ const port = 5000;
 const cors = require("cors");
 const { Pool } = require("pg");
 
-dotenv.config({
-  path: "./config.env",
-});
-
 app.use(cors());
 
 const bodyParser = require("body-parser");

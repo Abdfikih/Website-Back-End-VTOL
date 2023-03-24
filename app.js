@@ -27,9 +27,6 @@ var client = new Client({
   database: process.env.PG_DATABASE,
   port: process.env.PG_PORT,
   host: process.env.PG_HOST,
-  ssl: {
-    rejectUnauthorized: false,
-  },
 });
 client.connect();
 

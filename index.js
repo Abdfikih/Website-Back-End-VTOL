@@ -35,6 +35,8 @@ pool.connect((err, client, done) => {
   console.log("Connected to database");
 });
 
+const client = await pool.connect();
+
 function truncatedTableNode() {
   const query = `TRUNCATE TABLE coordinate`;
 
@@ -180,9 +182,21 @@ function getUpdatesCoordinate(node, callback) {
   });
 }
 
-app.get("/updatesumnode", (req, res) => {
-  getUpdatesSumNode((rows) => {
-    res.send(rows);
+app.get("/updatesumnode", async (req, res) => {
+  const client = await pool.connect();
+
+  const query = `SELECT * FROM sum_node`;
+
+  client.query(query, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Error retrieving sum_node data");
+    } else {
+      const rows = result.rows;
+      res.status(200).send(rows);
+    }
+
+    client.release();
   });
 });
 

@@ -21,17 +21,19 @@ app.use(function (req, res, next) {
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-const { Client } = require("pg");
-
-var client = new Client({
-  user: "qsgapisijhjbmh",
-  password: "cf25176269f95baf51be1b429ab1dc1e07dc2d6365aab64f44e7f1f0f96d3ecd",
-  database: "degs0riapocj76",
-  port: 5432,
-  host: "ec2-3-219-213-121.compute-1.amazonaws.com",
+const pool = new Pool({
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_NAME,
   ssl: true,
 });
-client.connect();
+
+pool.connect((err, client, done) => {
+  if (err) throw err;
+  console.log("Connected to database");
+});
 
 function truncatedTableNode() {
   const query = `TRUNCATE TABLE coordinate`;

@@ -1,8 +1,13 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const port = 5000;
 const cors = require("cors");
 const { Pool } = require("pg");
+
+dotenv.config({
+  path: "./config.env",
+});
 
 app.use(cors());
 
@@ -21,12 +26,14 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 const { Client } = require("pg");
 
 var client = new Client({
-  user: "qsgapisijhjbmh",
-  password: "cf25176269f95baf51be1b429ab1dc1e07dc2d6365aab64f44e7f1f0f96d3ecd",
-  database: "degs0riapocj76",
-  port: 5432,
-  host: "ec2-3-219-213-121.compute-1.amazonaws.com",
-  ssl: true,
+  user: process.env.PG_USER,
+  password: process.env.PG_PASSWORD,
+  database: process.env.PG_DATABASE,
+  port: process.env.PG_PORT,
+  host: process.env.PG_HOST,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 client.connect();
 

@@ -202,6 +202,10 @@ app.get("/updatesumnode", async (req, res) => {
   });
 });
 
+app.get("/hello", (req, res) => {
+  res.send("Hello, world!");
+});
+
 app.get("/updatecentral", (req, res) => {
   getUpdatesCentral((rows) => {
     res.send(rows);

@@ -35,7 +35,7 @@ pool.connect((err, client, done) => {
   console.log("Connected to database");
 });
 
-const client = await pool.connect();
+const client = pool.connect();
 
 function truncatedTableNode() {
   const query = `TRUNCATE TABLE coordinate`;
@@ -212,10 +212,10 @@ app.get("/updatecentral", (req, res) => {
   });
 });
 
-app.get("/updatenode/:nodeId", (req, res) => {
+app.get("/api/updates/:nodeId", (req, res) => {
   const { nodeId } = req.params;
-  getUpdatesNode(nodeId, (rows) => {
-    res.send(rows);
+  getUpdatesNode(nodeId, (updates) => {
+    res.json(updates);
   });
 });
 

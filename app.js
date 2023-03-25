@@ -1,4 +1,4 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
 const port = 5000;
@@ -8,23 +8,23 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const xss = require("xss-clean");
 
-dotenv.config({
-  path: "./config.env",
-});
-
 app.use(helmet());
 app.use(morgan("dev"));
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,PATCH,OPTIONS");
   next();
+});
+
+dotenv.config({
+  path: "./config.env",
 });
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -37,7 +37,7 @@ var client = new Client({
   database: process.env.PG_DATABASE,
   port: process.env.PG_PORT,
   host: process.env.PG_HOST,
-  ssl: tprocess.env.PG_SSL,
+  ssl: process.env.PG_SSL,
 });
 client.connect();
 

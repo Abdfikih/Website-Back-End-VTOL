@@ -1,7 +1,6 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
-const port = 5000;
 const cors = require("cors");
 const { Pool } = require("pg");
 const morgan = require("morgan");
@@ -244,6 +243,8 @@ app.post("/insertcoordinate", (req, res) => {
   insertDataCoordinate(req.body.node, req.body.latitude, req.body.longitude, req.body.coordinate);
   res.send("Data coordinate inserted into the database");
 });
+
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`App is listening on port ${port}`);
